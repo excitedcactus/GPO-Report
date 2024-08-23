@@ -20,20 +20,18 @@
 #>
 
 #Definte Results Directory
-#$ResultsDirectory = C:\Windows\Temp\Unit42_GPOReport\Unit42_GPOReport
-$ResultsDirectory = "C:\Users\Administrator\Desktop\Testing"
+$ResultsDirectory = C:\Windows\Temp\Unit42_GPOReport\Unit42_GPOReport
 $SYSVOLFolder = Get-ChildItem -Path $env:SystemRoot | Where-Object {$_.PsIsContainer -and $PSItem.Name -like "*sysvol*"} | Select -ExpandProperty FullName
 
 function Check-Results-Directory {
 	if ((Test-Path $ResultsDirectory) -eq $True) {
 	#Clear files
-	rm $ResultsDirectory -r
 
 	Write-Host "Creating directory..."
 	[void](New-Item -ItemType "directory" -Path $ResultsDirectory)
 	}
 	else {
-		New-Item -ItemType "directory" -Path $ResultsDirectory 
+		[void]New-Item -ItemType "directory" -Path $ResultsDirectory 
 	}
 }
 
