@@ -1,3 +1,24 @@
+<#
+	.SYNOPSIS
+  		Grabs various GPO and ADMX activity to streamline GPO investigations within Active Directory.
+    
+	.DESCRIPTION
+		A description of the file.
+	
+	.PARAMETER Path
+		A description of the Path parameter.
+	
+	.PARAMETER UserList
+		A description of the UserList parameter.
+	
+	.NOTES
+		===========================================================================
+		Created on:   	8/23/2024 14:03
+		Created by:   	Noah Rincon
+		Usage: Run script, no arguments needed
+		===========================================================================
+#>
+
 #Definte Results Directory
 #$ResultsDirectory = C:\Windows\Temp\Unit42_GPOReport\Unit42_GPOReport
 $ResultsDirectory = "C:\Users\Administrator\Desktop\Testing"
