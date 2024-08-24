@@ -20,8 +20,8 @@
 #>
 
 #Definte Results Directory
-$TempDirectory = Get-Item -Path $env:SystemRoot\temp | select -ExpandProperty Fullname
-$ResultsDirectory = Join-Path $ResultsDirectory "GPOReportFolder"
+$TempDirectory =  Get-ChildItem -Path $env:SystemRoot | Where-Object {$_.PsIsContainer -and $PSItem.Name -eq "Temp"} | Select -ExpandProperty FullName
+$ResultsDirectory = Join-Path $TempDirectory "GPOReportFolder"
 $SYSVOLFolder = Get-ChildItem -Path $env:SystemRoot | Where-Object {$_.PsIsContainer -and $PSItem.Name -like "*sysvol*"} | Select -ExpandProperty FullName
 
 function Check-Results-Directory {
@@ -98,7 +98,10 @@ function Zip-Results {
 	#Zip results directory
 	$ZipOutput = Join-Path $ResultsDirectory "GPOResults.zip"
 	Compress-Archive -Path $ResultsDirectory\* -DestinationPath $ZipOutput
-	#Cleanup files
+	Write-Host "Finished Zipping!"
+ 	#Cleanup files
+  	Get-ChildItem -Recurse -File -Path $ResultsDirectory | Where {($_.Extension -ne ".zip")} | Remove-Item
+   	Write-Host "Results directory cleaned up, please download .zip file"
 }
 
 Check-Results-Directory
